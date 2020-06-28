@@ -122,8 +122,6 @@ You can apply those hints in SQL queries like this:
 
 > **NOTE**: It works with almost all markdown flavours (the below blank line matters).
 
----
-
 Besides those performance improvement, Spark 3.0 also provides tons of new features that are not strictly related to our data engineering products. Please visit [here](https://databricks.com/sparkaisummit/north-america-2020/keynotes) for a more detailed overview of Spark 3.0.
 
 # References
