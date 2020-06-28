@@ -4,4 +4,4 @@
 
 #### List of articles
 
-- **June 27th, 2020: [What's new in Spark 3.0 - from Performance perspective](./blogs/spark-3.0.md)**
+- **June 27th, 2020: [What's new in Spark 3.0 - from Performance Perspective](./blogs/spark-3.0.md)**
