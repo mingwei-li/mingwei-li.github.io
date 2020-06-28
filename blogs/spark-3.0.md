@@ -72,7 +72,7 @@ Similar to the optimization done in broadcast hash join, dynamic partition pruni
 
 > **What is Filter Pushdown**: In big data world, popular execution engines like Apache Spark and Apache Drill will try to eliminate whole table scanning as much as possible by applying for data filtering before the scanning operations, thus push down the filter to early stage of query execution. A perfect example will be applying where clause on physical partition keys
 
-In Spark 3.0, Conceptually, dynamic partition pruning will change SQL like this (where par_key is the partition key of fact table):
+In Spark 3.0, Conceptually, dynamic partition pruning will change SQL like this (where `par_key` is the partition key of fact table):
 
 ```sql
 SELECT fact.value1
