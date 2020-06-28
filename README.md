@@ -35,3 +35,13 @@ Your Pages site will use the layout and styles from the Jekyll theme you have se
 ### Support or Contact
 
 Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+
+# What's New in Spark 3.0 - Performance
+
+## Introduction
+
+Upon the Spark + AI Summit 2020, Spark 3.0 is introduced to the tech communities with plenty of new features and improvements. Spark core performance improvement, Delta lake updates, better machine learning capabilities, and so much more. This article will mainly focus on its very essential performance updates.
+
+![it worked](https://github.com/mingwei-li/mingwei-li.github.io/blob/master/test.png)
+![it worked](./test.png)
+
