@@ -5,3 +5,4 @@
 #### List of articles
 
 - **June 27th, 2020: [What's New in Spark 3.0 - from Performance Perspective](./blogs/spark-3.0.md)**
+- **July 3th, 2020: [Hyperspace - Say YES to Indexing on DataFrame](./blogs/hyperspace.md)**
