@@ -200,3 +200,6 @@ If you often has queries that
 
 ### 4. Summary
 That's it for Hyperspace. It builds indexes for your specified columns, to bypass distributed shuffle sort phase during runtime, and therefore boost your query performance. It is still in development stage, so please **use it with caution** in your production deployment. 
+
+---
+[Mingwei's blog - Deep Dive on Big Data Technologies](../README.md)

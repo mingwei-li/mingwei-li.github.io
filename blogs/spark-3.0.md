@@ -128,3 +128,6 @@ Besides those performance improvement, Spark 3.0 also provides tons of new featu
 - [Spark 3.0 Introduction YouTube video](https://youtu.be/g-qZslQsOuE)
 - [Joins in Apache Spark](https://medium.com/@achilleus/https-medium-com-joins-in-apache-spark-part-3-1d40c1e51e1c)
 - [Spark 3.0 Join Hints](http://blog.madhukaraphatak.com/spark-3-introduction-part-9/)
+
+---
+[Mingwei's blog - Deep Dive on Big Data Technologies](../README.md)
