@@ -1,5 +1,5 @@
 # Hyperspace - Say **YES** to Indexing on DataFrame
-Often times, people will be frastratued by the fact that modern Data Lake built on top of Spark and columnar stores isn't so performant when it comes to ad-hoc look up queries, ranges or even joins. Because of data lake's OLAP-oriented nature. What if I can create indexes just like a traditional database that support ad-hoc queries? Well the answer for that is [Hyperspace by Microsoft](https://microsoft.github.io/hyperspace/), an indexing subsystem on top of Apache Spark.
+Often times, people will be frustrated by the fact that modern Data Lake built on top of Spark and columnar stores isn't so performant when it comes to ad-hoc look up queries, ranges or even joins. Because of data lake's OLAP-oriented nature. What if I can create indexes just like a traditional database that support ad-hoc queries? Well the answer for that is [Hyperspace by Microsoft](https://microsoft.github.io/hyperspace/), an indexing subsystem on top of Apache Spark.
 
 ## What is Hyperspace
 Hyperspace is a **simple set of APIs** in Spark programming model, to let you easily create and manage indexes on your existing `DataFrame`, and inject its faster execution into Spark's original execution plan to fully utilize the performance boost provided by indexes. 
@@ -179,7 +179,7 @@ Let's run `query.explain()` to see what's executed under the hood:
    +- *(1) FileScan parquet [id#10,name#11] Batched: true, Format: Parquet, Location: InMemoryFileIndex[file:/Users/mingwli/Dev/lib/hadoop-2.9.2/bin/spark-warehouse/indexes/index/v__=0], PartitionFilters: [], PushedFilters: [IsNotNull(id), EqualTo(id,1)], ReadSchema: struct<id:int,name:string>
 ```
 
-Physical plan is rewired by Hyperspace. During the pysical plan execution, index created is being scanned instead. Compared the original CSV, index parquet file is pre sorted by column `id` by Hyperspace. Therefore, lookup query like `WHERE id = 123` is faster during execution by hitting the index directly.
+Physical plan is rewired by Hyperspace. During the physical plan execution, index created is being scanned instead. Compared the original CSV, index parquet file is pre sorted by column `id` by Hyperspace. Therefore, lookup query like `WHERE id = 123` is faster during execution by hitting the index directly.
 
 Besides this core API functionality, Hyperspace also include index management APIs like:
 
@@ -196,7 +196,8 @@ hs.vacuumIndex("index2")
 If you often has queries that 
 - Look up a spcific value (`WHERE col = 'abcd'`)
 - Narrow the data into a very small range (`WHERE num > 4 AND num < 7`)
-- Or do joins between 2 tables against the common column (`JOIN table2 ON table1.value = table2.value`), you can definitely create indexes on top of those needed columns to speed up your queries
+- Or do joins between 2 tables against the common column (`JOIN table2 ON table1.value = table2.value`), 
+you can definitely create indexes on top of those needed columns to speed up your queries
 
 ## Summary
 That's it for Hyperspace. It builds indexes for your specified columns, to bypass distributed shuffle sort phase during runtime, and therefore boost your query performance. It is still in development stage, so please **use it with caution** in your production deployment. 
