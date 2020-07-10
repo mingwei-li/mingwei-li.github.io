@@ -191,14 +191,14 @@ hs.deleteIndex("index2")
 hs.vacuumIndex("index2")
 ```
 
-### 3. When to use Hyperspace
+## When to use Hyperspace
 
 If you often has queries that 
 - Look up a spcific value (`WHERE col = 'abcd'`)
 - Narrow the data into a very small range (`WHERE num > 4 AND num < 7`)
 - Or do joins between 2 tables against the common column (`JOIN table2 ON table1.value = table2.value`), you can definitely create indexes on top of those needed columns to speed up your queries
 
-### 4. Summary
+## Summary
 That's it for Hyperspace. It builds indexes for your specified columns, to bypass distributed shuffle sort phase during runtime, and therefore boost your query performance. It is still in development stage, so please **use it with caution** in your production deployment. 
 
 ---
