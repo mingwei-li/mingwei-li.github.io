@@ -8,7 +8,7 @@ Our team owns Vrbo's promotional email's data engineering and one of the core da
 
 ![email-activity](../images/event-order/email-activities.png)
 
-Events come from different places, different channels, and have different delays. They carry different timestamps and values. If not processed carefully, this eventually will act against users' will on their privacy settings. In the scenario shown below, it will cause the user to have the opposite setting on his/her email preference setting:
+Events come from different places, different channels, and have different delays. They carry different timestamps and values. If not processed carefully, this eventually will act against users' will on their privacy settings. In the scenario shown below, it will cause the user to have the opposite value on his/her email preference setting:
 
 ![email-activity](../images/event-order/wrong-email-order.png)
 
@@ -27,16 +27,16 @@ To discuss those different scenarios, let's step back and start with the basics.
 
 Timestamp is the foundation of everything here. Without the reference of timestamps, you lose the truth of an event. But what are the different timestamp types? Are timestamps what you thought they are in your data pipelines upstream/downstream contracts? You will definitely see lots of similar fields called:
 
-- createdAt
-- updatedAt
-- requestedTimestamp
-- timestamp
-- updateDate
-- createDate
-- event.header.time
-- body.timestamp
-- dateid
-- hourid
+- `createdAt`
+- `updatedAt`
+- `requestedTimestamp`
+- `timestamp`
+- `updateDate`
+- `createDate`
+- `event.header.time`
+- `body.timestamp`
+- `dateid`
+- `hourid`
 - ...
 
 Ambiguity should be removed and strong definitions should be in place. The entire timeline of an event can be illustrated like this:
@@ -71,7 +71,7 @@ Stream processing tries to process events in real time:
 
 - Event processing order is the same as event arrival time
 - Retry won't cause duplicate events issue
-- If event arrival time is different than the actual event timestamp payload, the event processing will be out of order unless a local buffer or a mini batch is implemented to preserve a series of events and sort them in the correct order
+- If event arrival time is different than the actual event timestamp payload, the event processing will be out of order unless a **local buffer or a mini batch** is implemented to preserve a series of events and sort them in the correct order
 
 ![stream](../images/event-order/stream.png)
 

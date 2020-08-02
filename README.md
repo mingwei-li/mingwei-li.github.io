@@ -6,3 +6,4 @@
 
 - **June 27th, 2020: [What's New in Spark 3.0 - from Performance Perspective](./blogs/spark-3.0.md)**
 - **July 3th, 2020: [Hyperspace - Say YES to Indexing on DataFrame](./blogs/hyperspace.md)**
+- **Aug 2nd, 2020: [Be Vigilant about Time Order in Event Based Data Processing](./blogs/event-order.md)**
