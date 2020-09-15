@@ -10,7 +10,7 @@
         - [.csv() call](#csv-call)
         - [More generic .format() call](#more-generic-format-call)
         - [And you can do this because of its not so well thought yet free form API design](#and-you-can-do-this-because-of-its-not-so-well-thought-yet-free-form-api-design)
-    - [Create from CSV file with schema definition](#Create-from-csv-file-with-schema-definition)
+    - [Create from CSV file with schema definition](#create-from-csv-file-with-schema-definition)
         - [Cascading calls from StructType](#cascading-calls-from-structtype)
         - [Pass in an array of StructField to StructType](#pass-in-an-array-of-structfield-to-structtype)
         - [Load CSV with schema definition](#load-csv-with-schema-definition)
@@ -18,16 +18,16 @@
         - [From RowFactory API call](#from-rowfactory-api-call)
         - [From POJO class as schema definition](#from-pojo-class-as-schema-definition)
 - [III. Select](#iii-select)
-    - [with free formatted string as column](#with-free-formatted-string-as-column)
+    - [With free formatted string as column](#with-free-formatted-string-as-column)
     - [With Dataset col() call to be stronger typing](#with-dataset-col-call-to-be-stronger-typing)
-    - [With static col() call without dataset handle](#With-static-col-call-without-dataset-handle)
+    - [With static col() call without dataset handle](#with-static-col-call-without-dataset-handle)
     - [Select when, otherwise](#select-when-otherwise)
     - [Select with alias, columnRenamed or withColumn](#select-with-alias-columnrenamed-or-withcolumn)
 - [IV. Filter, Where](#iv-filter-where)
     - [Use col() and functions](#use-col-and-functions)
     - [With logical operators](#with-logical-operators)
     - [Use literal string expressions](#use-literal-string-expressions)
-- [V. Join](#v-Join)
+- [V. Join](#v-join)
     - [Join with column operator calls](#join-with-column-operator-calls)
     - [Join on the same column](#join-on-the-same-column)
     - [Join on more complex condition](#join-on-more-complex-condition)
@@ -266,7 +266,7 @@ Dataset datasetFromPojo = spark.createDataFrame(users, User.class);
 
 ## III. Select
 
-#### with free formatted string as column
+#### With free formatted string as column
 
 ```java
 usersDataSet4.select("id", "age").show();
