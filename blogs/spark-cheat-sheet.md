@@ -1,43 +1,43 @@
 # Spark SQL Query Cheat Sheet - Java Version
 
 - [0. My Frustration](#0-my-frustration)
-- [I. Environment](#I-environment)
-    - [Runtime environment](#Runtime-environment)
-    - [Files / data used in this blog](#Files-/-data-used-in-this-blog)
-    - [Initialize Spark in local](#Initialize-Spark-in-local)
-- [II. Creating DataFrames / Dataset](#II-Creating-DataFrames-/-Dataset)
-    - [Create from CSV file](#Create-from-CSV-file)
+- [I. Environment](#i-environment)
+    - [Runtime environment](#runtime-environment)
+    - [Files and data used in this blog](#files-and-data-used-in-this-blog)
+    - [Initialize Spark in local](#initialize-spark-in-local)
+- [II. Creating DataFrames and Dataset](#ii-creating-dataframes-and-dataset)
+    - [Create from CSV file](#create-from-csv-file)
         - [.csv() call](#csv-call)
-        - [More generic .format() call](#More-generic-format-call)
-        - [And you can do this because of its not so well thought yet free form API design](#And-you-can-do-this-because-of-its-not-so-well-thought-yet-free-form-API-design)
-    - [Create from CSV file with schema definition](#Create-from-CSV-file-with-schema-definition)
-        - [Cascading calls from StructType](#Cascading-calls-from-StructType)
-        - [Pass in an array of StructField to StructType](#Pass-in-an-array-of-StructField-to-StructType)
-        - [Load CSV with schema definition](#Load-CSV-with-schema-definition)
-    - [Create it manually](#Create-it-manually)
-        - [From RowFactory API call](#From-RowFactory-API-call)
-        - [From POJO class as schema definition](#From-POJO-class-as-schema-definition)
-- [III. Select](#III-Select)
+        - [More generic .format() call](#more-generic-format-call)
+        - [And you can do this because of its not so well thought yet free form API design](#and-you-can-do-this-because-of-its-not-so-well-thought-yet-free-form-api-design)
+    - [Create from CSV file with schema definition](#Create-from-csv-file-with-schema-definition)
+        - [Cascading calls from StructType](#cascading-calls-from-structtype)
+        - [Pass in an array of StructField to StructType](#pass-in-an-array-of-structfield-to-structtype)
+        - [Load CSV with schema definition](#load-csv-with-schema-definition)
+    - [Create it manually](#create-it-manually)
+        - [From RowFactory API call](#from-rowfactory-api-call)
+        - [From POJO class as schema definition](#from-pojo-class-as-schema-definition)
+- [III. Select](#iii-select)
     - [with free formatted string as column](#with-free-formatted-string-as-column)
-    - [With Dataset col() call to be stronger typing](#With-Dataset-col-call-to-be-stronger-typing)
+    - [With Dataset col() call to be stronger typing](#with-dataset-col-call-to-be-stronger-typing)
     - [With static col() call without dataset handle](#With-static-col-call-without-dataset-handle)
-    - [Select when, otherwise](#Select-when-otherwise)
-    - [Select with alias, columnRenamed or withColumn](#Select-with-alias-columnRenamed-or-withColumn)
-- [IV. Filter, Where](#IV-Filter-Where)
-    - [Use col() and functions](#Use-col-and-functions)
-    - [With logical operators](#With-logical-operators)
-    - [Use literal string expressions](#Use-literal-string-expressions)
-- [V. Join](#V-Join)
-    - [Join with column operator calls](#Join-with-column-operator-calls)
-    - [Join on the same column](#Join-on-the-same-column)
-    - [Join on more complex condition](#Join-on-more-complex-condition)
-- [VI. Aggregate](#VI-Aggregate)
-    - [Aggregate on full set without group by](#Aggregate-on-full-set-without-group-by)
-    - [Group by and do a count](#Group-by-and-do-a-count)
-    - [Group by and do an aggregate operation](#Group-by-and-do-an-aggregate-operation)
-    - [Group by transformed column](#Group-by-transformed-column)
-- [VII. Combined real world complex example](#VII-Combined-real-world-complex-example)
-- [VIII. Summary](#VIII-Summary)
+    - [Select when, otherwise](#select-when-otherwise)
+    - [Select with alias, columnRenamed or withColumn](#select-with-alias-columnrenamed-or-withcolumn)
+- [IV. Filter, Where](#iv-filter-where)
+    - [Use col() and functions](#use-col-and-functions)
+    - [With logical operators](#with-logical-operators)
+    - [Use literal string expressions](#use-literal-string-expressions)
+- [V. Join](#v-Join)
+    - [Join with column operator calls](#join-with-column-operator-calls)
+    - [Join on the same column](#join-on-the-same-column)
+    - [Join on more complex condition](#join-on-more-complex-condition)
+- [VI. Aggregate](#vi-aggregate)
+    - [Aggregate on full set without group by](#aggregate-on-full-set-without-group-by)
+    - [Group by and do a count](#group-by-and-do-a-count)
+    - [Group by and do an aggregate operation](#group-by-and-do-an-aggregate-operation)
+    - [Group by transformed column](#group-by-transformed-column)
+- [VII. Combined real world complex example](#vii-combined-real-world-complex-example)
+- [VIII. Summary](#viii-summary)
 
 ## 0. My Frustration
 
@@ -68,7 +68,7 @@ Spark dependency pom:
 
 Spark library version from Maven needs to align with the Scala version: they are both **2.11** in my setup.
 
-### Files / data used in this blog
+### Files and data used in this blog
 
 users.csv:
 
@@ -104,7 +104,7 @@ SparkSession spark = SparkSession.builder().appName("Blog Cheat Sheet").master("
 spark.sparkContext().setLogLevel("ERROR");
 ```
 
-## II. Creating DataFrames / Dataset
+## II. Creating DataFrames and Dataset
 
 ### Create from CSV file
 
