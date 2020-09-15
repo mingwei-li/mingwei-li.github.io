@@ -1,7 +1,7 @@
 # Spark SQL Query Cheat Sheet - Java Version
 
-- [0. My Frustration](#0-My-Frustration)
-- [I. Environment](#I-Environment)
+- [0. My Frustration](#0-my-frustration)
+- [I. Environment](#I-environment)
     - [Runtime environment](#Runtime-environment)
     - [Files / data used in this blog](#Files-/-data-used-in-this-blog)
     - [Initialize Spark in local](#Initialize-Spark-in-local)
