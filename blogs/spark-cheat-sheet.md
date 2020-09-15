@@ -1,12 +1,51 @@
 # Spark SQL Query Cheat Sheet - Java Version
 
+- [0. My Frustration](#0-My-Frustration)
+- [I. Environment](#I-Environment)
+    - [Runtime environment](#Runtime-environment)
+    - [Files / data used in this blog](#Files-/-data-used-in-this-blog)
+    - [Initialize Spark in local](#Initialize-Spark-in-local)
+- [II. Creating DataFrames / Dataset](#II-Creating-DataFrames-/-Dataset)
+    - [Create from CSV file](#Create-from-CSV-file)
+        - [.csv() call](#csv-call)
+        - [More generic .format() call](#More-generic-format-call)
+        - [And you can do this because of its not so well thought yet free form API design](#And-you-can-do-this-because-of-its-not-so-well-thought-yet-free-form-API-design)
+    - [Create from CSV file with schema definition](#Create-from-CSV-file-with-schema-definition)
+        - [Cascading calls from StructType](#Cascading-calls-from-StructType)
+        - [Pass in an array of StructField to StructType](#Pass-in-an-array-of-StructField-to-StructType)
+        - [Load CSV with schema definition](#Load-CSV-with-schema-definition)
+    - [Create it manually](#Create-it-manually)
+        - [From RowFactory API call](#From-RowFactory-API-call)
+        - [From POJO class as schema definition](#From-POJO-class-as-schema-definition)
+- [III. Select](#III-Select)
+    - [with free formatted string as column](#with-free-formatted-string-as-column)
+    - [With Dataset col() call to be stronger typing](#With-Dataset-col-call-to-be-stronger-typing)
+    - [With static col() call without dataset handle](#With-static-col-call-without-dataset-handle)
+    - [Select when, otherwise](#Select-when-otherwise)
+    - [Select with alias, columnRenamed or withColumn](#Select-with-alias-columnRenamed-or-withColumn)
+- [IV. Filter, Where](#IV-Filter-Where)
+    - [Use col() and functions](#Use-col-and-functions)
+    - [With logical operators](#With-logical-operators)
+    - [Use literal string expressions](#Use-literal-string-expressions)
+- [V. Join](#V-Join)
+    - [Join with column operator calls](#Join-with-column-operator-calls)
+    - [Join on the same column](#Join-on-the-same-column)
+    - [Join on more complex condition](#Join-on-more-complex-condition)
+- [VI. Aggregate](#VI-Aggregate)
+    - [Aggregate on full set without group by](#Aggregate-on-full-set-without-group-by)
+    - [Group by and do a count](#Group-by-and-do-a-count)
+    - [Group by and do an aggregate operation](#Group-by-and-do-an-aggregate-operation)
+    - [Group by transformed column](#Group-by-transformed-column)
+- [VII. Combined real world complex example](#VII-Combined-real-world-complex-example)
+- [VIII. Summary](#VIII-Summary)
+
 ## 0. My Frustration
 
 ![frustration](../images/spark-cheat-sheet/frustration.jpg)
 
 I'm definitely not an expert in Spark SQL, or in Java, and struggled so much when reading or writing complex Spark SQL codes especially when they are wrapped in Java / Scala DataFrame APIs. Personally, I always prefer Java over Scala because Java provides strong typing and makes syntax or semantic errors way easier to discover before compiling. However, Spark SQL is written natively in Scala and made available in Java through the library, which makes Spark SQL codes in Java look like a freak. I need a cheat sheet for myself, to ultimately list all weird syntax and be free from those "free formatted" confusing Scala API definitions. Hopefully, it could help you in some way as well. Sometimes, I just miss cumbersome yet definitive old school Java code that can explain itself after you read it 10 times end to end.
 
-## 1. Environment
+## I. Environment
 
 ### Runtime environment
 
@@ -67,7 +106,7 @@ spark.sparkContext().setLogLevel("ERROR");
 
 ## II. Creating DataFrames / Dataset
 
-### 2.1 Create from CSV file
+### Create from CSV file
 
 #### .csv() call
 
@@ -88,7 +127,7 @@ Dataset usersDataSet2 = spark.read().format("csv").option("header", "true").load
 Dataset usersDataSet3 = spark.read().format("parquet").option("header", "true").csv(csvFile);
 ```
 
-### 2.2 Create from CSV file with schema definition
+### Create from CSV file with schema definition
 
 Easiest way to construct StructField that I found is to have a constructor call of `StructField("name of column", DataTypes.SupportedType, can be null boolean, Metadata placeholder)`
 
@@ -129,7 +168,7 @@ Dataset usersDataSet4 = spark.read().format("csv").option("header", "true").sche
 
 > If the schema definition doesn't align in order with the header definition, all values of the generated Dataset will have null values.
 
-### 2.3 Create it manually
+### Create it manually
 
 #### From RowFactory API call
 
@@ -142,7 +181,7 @@ Dataset manualDatSet = spark.createDataFrame(rows, schema);
 manualDatSet.show(false);
 ```
 
-#### From POJO class as row/schema definition
+#### From POJO class as schema definition
 
 User.java:
 
@@ -233,7 +272,7 @@ Dataset datasetFromPojo = spark.createDataFrame(users, User.class);
 usersDataSet4.select("id", "age").show();
 ```
 
-#### With Dataset.col() call to be stronger typing
+#### With Dataset col() call to be stronger typing
 
 ```java
 usersDataSet4.select(usersDataSet4.col("id"), usersDataSet4.col("age"));
