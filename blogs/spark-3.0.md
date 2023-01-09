@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Upon the Spark + AI Summit 2020, Spark 3.0 is introduced to the tech communities with plenty of new features and improvements. Spark core performance improvement, Delta lake updates, better machine learning capabilities, and so much more. This article will mainly focus on its very essential performance updates.
+Upon the Spark + AI Summit 2020, Spark 3.0 is introduced to the tech communities with plenty of new features and improvements. Spark core performance improvements, Delta lake updates, better machine learning capabilities, and so much more. This article will mainly focus on its very essential performance updates.
 
 ![overview](../images/spark-3.0/overview.png)
 
